@@ -1,0 +1,8 @@
+export const UNKNOWN_ERROR = "UNKNOWN ERROR";
+export const INVALID_PARAMETERS_ERROR = "INVALID PARAMETERS";
+export const KEY_NOT_FOUND_ERROR = "KEY NOT FOUND";
+
+export const DATA_TYPES = {
+    USER: "USER",
+    EMAIL: "EMAIL"
+}
