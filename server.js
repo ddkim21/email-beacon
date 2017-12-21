@@ -1,15 +1,11 @@
 const express = require('express');
 const redis = require('redis-mock');
+const bluebird = require('bluebird');
+
+bluebird.promisifyAll(redis.RedisClient.prototype);
 
 let _app = express();
 let _client = redis.createClient();
-
-// client.set("string key", "string val", (err, resp) => {
-//     console.log(resp);
-// });
-// client.get("string key", (error, reply) => {
-//     console.log(reply);
-// })
 
 _app.get('/getUrl/:email', (req, res) => {
     let baseImageUrl = "http://localhost:3000/image/";
@@ -17,11 +13,11 @@ _app.get('/getUrl/:email', (req, res) => {
 
     _client.set(imageId, req.params.email, (err, reply) => {
         if (err) {
-            //TODO: Handle error.
+            res.status(500).send('Something broke!');
+        } else {
+            res.send(baseImageUrl + imageId);
         }
-        res.send(baseImageUrl + imageId);
     });
-
 })
 
 _app.get('/image/:id', (req, res) => {
@@ -29,14 +25,20 @@ _app.get('/image/:id', (req, res) => {
 
     _client.get(imageId, (err, reply) => {
         if (err) {
-            //TODO: Handle error.
+            res.status(500).send('Something broke!');
+        } else if (reply == null){
+            res.status(204).send("Image URL not found!");
+        } else {
+            //TODO: Process data and add data to DB.
+            res.sendFile(__dirname + "/public/1x1.png");
         }
-        //TODO: give back actual image.
-        //Process data and add data to DB.
-        res.send(reply);
     })
 })
 
 _app.listen(3000, () => {
     console.log("listening on port 3000!");
 })
+
+function storeData(){
+
+}

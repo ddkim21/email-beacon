@@ -19,3 +19,11 @@ request.get("http://localhost:3000/getUrl/hello@test.com", (error, response, bod
         console.log(body);
     });
 });
+
+request.get("http://localhost:3000/image/1", (error, response, body) => {
+    if (error) {
+        console.log("error found!");
+    }
+    console.log(error);
+    console.log(body);
+});
