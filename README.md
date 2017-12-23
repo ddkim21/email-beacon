@@ -1,9 +1,9 @@
 # email-beacon
 
-TO BUILD:
-npm install
-npm run build
-
+TO BUILD: <br />
+npm install <br />
+npm run build <br />
+<br />
 TO TEST:
 npm test (run after building)
 
