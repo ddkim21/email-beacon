@@ -6,17 +6,21 @@
   "scripts": {
     "build": "babel src -d dist",
     "start": "npm run build && NODE_ENV=local node dist/server.js",
-    "start-prod": "npm run build && export NODE_ENV=production && node dist/server.js"
+    "start-prod": "npm run build && export NODE_ENV=production && node dist/server.js",
+    "test": "mocha --compilers js:babel-core/register"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "bluebird": "^3.5.1",
     "config": "^1.28.1",
     "express": "^4.16.2",
+    "mocha": "^4.0.1",
     "path": "^0.12.7",
     "redis-mock": "^0.20.0",
     "request": "^2.83.0",
+    "supertest": "^3.0.0",
     "uuid": "^3.1.0",
     "validator": "^9.2.0"
   },

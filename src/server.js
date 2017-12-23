@@ -11,7 +11,7 @@ import {getStatusForErrorMessage, mockNotificationEmailOpened} from './helpers';
 let _app = express();
 let _client = redis.createClient();
 
-_app.get('/health', (req, res) => res.send('ok'));
+_app.get('/health', (req, res) => res.status(200).send('ok'));
 
 _app.get('/getUrl/:email', (req, res) => {
     const email = req.params.email;
@@ -74,20 +74,20 @@ _app.get('/image/:uuid', (req, res) => {
         }
     ).then(
         (emailObject) => {
-            console.log("this case is being run!");
             mockNotificationEmailOpened(emailObject);
             res.status(200).sendFile(path.resolve('public/1x1.png'));            
         }
     ).catch(
         (error) => {
-            console.log("this error is being run!");
-            console.log(error);
             const statusNumber = getStatusForErrorMessage(error);
             res.status(statusNumber).send(error);
         }
     );
 });
 
-_app.listen(4000, () => {
-    console.log("listening on port 4000!");
+const server = _app.listen(4000, () => {
+    const port = server.address().port;
+    console.log(`listening on port ${port}!`);
 });
+
+module.exports = server;
