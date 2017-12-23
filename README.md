@@ -11,7 +11,7 @@ TO RUN SERVER (use curl to test)
 npm run start (will also build before running)  
 curl localhost:4000/getUrl/hello@precognitive.io (run this in another tab)  
   
-NOTABLE FILES  
+NOTABLE FILES    
 server.js:
   - Contains routes that make up the core functionality of the app.
     - '/geturl/:email' will post an email object (stored as string) into the redis database with a unique key.
